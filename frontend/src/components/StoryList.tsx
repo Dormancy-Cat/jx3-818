@@ -3,7 +3,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardHeader,
   CardMedia,
   CardActionArea,
   Typography,
@@ -78,14 +77,6 @@ const StoryList: React.FC = () => {
   const [selectedZone, setSelectedZone] = useState('');
   const [loading, setLoading] = useState(true);
   const [expandedSearch, setExpandedSearch] = useState(false);
-
-  // 剑网三门派列表
-  const schoolList = [
-    '天策', '万花', '纯阳', '七秀', '少林', 
-    '藏剑', '丐帮', '明教', '五毒', '唐门', 
-    '苍云', '长歌', '霸刀', '蓬莱', '凌雪', 
-    '衍天', '药宗', '刀宗', '万灵', '段氏'
-  ];
 
   useEffect(() => {
     loadStories();

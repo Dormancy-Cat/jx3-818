@@ -66,7 +66,9 @@ export const getSchoolColor = (school: string): string => {
   return colorMap[school] || '#888888'; // 默认灰色
 };
 
-export default {
+export const schoolUtils = {
   getSchoolIconUrl,
   getSchoolColor
-}; 
+};
+
+export default schoolUtils; 

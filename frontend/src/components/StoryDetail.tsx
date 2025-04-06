@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
   Button,
   Container,
   Divider,
   Paper,
   Chip,
-  Avatar,
 } from '@mui/material';
 import { Story, getStory } from '../services/api';
 import { getSchoolColor, getSchoolIconUrl } from '../utils/schoolUtils';
@@ -28,11 +25,7 @@ const StoryDetail: React.FC = () => {
   const [story, setStory] = useState<Story | null>(null);
   const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([]);
 
-  useEffect(() => {
-    loadStory();
-  }, [id]);
-
-  const loadStory = async () => {
+  const loadStory = useCallback(async () => {
     if (!id) return;
     try {
       const data = await getStory(id);
@@ -56,7 +49,11 @@ const StoryDetail: React.FC = () => {
     } catch (error) {
       console.error('加载818详情失败:', error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    loadStory();
+  }, [loadStory]);
 
   if (!story) {
     return <div>加载中...</div>;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Container, Box, alpha, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Container, Box, alpha } from '@mui/material';
 import StoryList from './components/StoryList';
 import StoryDetail from './components/StoryDetail';
 import SubmitStory from './components/SubmitStory';
 
 const App: React.FC = () => {
-  const theme = useTheme();
   // 设置背景图片URL
   const backgroundImageUrl = `${process.env.PUBLIC_URL}/images/backgrounds/image.png`;
   

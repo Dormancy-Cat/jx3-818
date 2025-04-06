@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
   TextField,
   Button,
@@ -16,7 +14,6 @@ import {
   Alert,
   IconButton,
   Paper,
-  Divider,
   Stack,
   alpha
 } from '@mui/material';
