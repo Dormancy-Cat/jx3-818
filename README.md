@@ -49,6 +49,14 @@ npm run dev
 
 - `MONGODB_URI`: MongoDB连接字符串
 
+## 更新日志
+
+### 2024-04-06
+- 修复了提交故事时出现的"Story is not a constructor"错误
+- 添加了客户端路由刷新支持
+- 更新了网站标题和描述
+- 优化了搜索功能，支持更多字段的搜索
+
 ## 贡献
 
 欢迎通过Pull Request或Issue贡献代码或提出建议。

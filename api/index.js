@@ -20,8 +20,8 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Could not connect to MongoDB:', err));
 
-// 导入Story模型和路由
-const Story = require('../backend/src/models/Story');
+// 导入Story模型
+const Story = require('./models/Story');
 
 // API路由
 app.get('/api/stories', async (req, res) => {
@@ -61,17 +61,19 @@ app.get('/api', (req, res) => {
 // 搜索路由
 app.get('/api/stories/search', async (req, res) => {
   try {
-    const { keyword, server, region, school } = req.query;
+    const { keyword, characterId, characterUid, server, region, school } = req.query;
     const query = {};
     
     if (keyword) {
       query.$or = [
         { title: { $regex: keyword, $options: 'i' } },
-        { content: { $regex: keyword, $options: 'i' } },
-        { characterName: { $regex: keyword, $options: 'i' } }
+        { summary: { $regex: keyword, $options: 'i' } },
+        { timeline: { $regex: keyword, $options: 'i' } }
       ];
     }
     
+    if (characterId) query.characterId = { $regex: characterId, $options: 'i' };
+    if (characterUid) query.characterUid = { $regex: characterUid, $options: 'i' };
     if (server) query.server = server;
     if (region) query.region = region;
     if (school) query.school = school;
@@ -79,6 +81,7 @@ app.get('/api/stories/search', async (req, res) => {
     const stories = await Story.find(query).sort({ createdAt: -1 });
     res.json(stories);
   } catch (error) {
+    console.error('Search error:', error);
     res.status(500).json({ message: error.message });
   }
 });
