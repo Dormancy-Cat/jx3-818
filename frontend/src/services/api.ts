@@ -44,9 +44,20 @@ export const searchStories = async (params: {
   characterId?: string;
   characterUid?: string;
   server?: string;
+  school?: string;
 }) => {
-  const response = await axios.get(`${API_URL}/stories/search`, { params });
-  return response.data;
+  console.log('Searching stories with params:', params);
+  try {
+    const response = await axios.get(`${API_URL}/stories/search`, { params });
+    console.log('Search results:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('搜索故事时出错:', error);
+    if (axios.isAxiosError(error) && error.response) {
+      console.error('Error response:', error.response.data);
+    }
+    throw error;
+  }
 };
 
 export const createStory = async (story: Omit<Story, '_id' | 'createdAt'>) => {
